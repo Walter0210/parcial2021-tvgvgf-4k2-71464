@@ -61,6 +61,15 @@ export class ProductosComponent implements OnInit {
   }
 
   Grabar() {}
-  Volver() {}
-  Agregar() {}
+
+  Volver() {
+    this.AccionABMC = 'L';
+  }
+
+  Agregar() {
+    this.AccionABMC = 'A';
+    this.FormAlta.reset({ ProductoID: 0 });
+    this.submitted = false;
+    this.FormAlta.markAsUntouched();
+  }
 }

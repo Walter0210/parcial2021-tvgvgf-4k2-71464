@@ -60,10 +60,10 @@
         formControlName="ProductoStock"
         [ngClass]="{'is-invalid': (FormAlta.controls.ProductoStock.touched || submitted)  && FormAlta.controls.ProductoStock.errors}"
       />
-        <span class="text-danger" *ngIf="(FormAlta.controls.ProductoNombre.touched || submitted) && FormAlta.controls.ProductoStock.errors && FormAlta.controls.ProductoStock.errors.required ">
+        <span class="text-danger" *ngIf="(FormAlta.controls.ProductoStock.touched || submitted) && FormAlta.controls.ProductoStock.errors && FormAlta.controls.ProductoStock.errors.required ">
         Dato requerido
       </span>
-        <span class="text-danger" *ngIf="(FormAlta.controls.ProductoNombre.touched || submitted) && FormAlta.controls.ProductoStock.errors?.pattern">
+        <span class="text-danger" *ngIf="(FormAlta.controls.ProductoStock.touched || submitted) && FormAlta.controls.ProductoStock.errors?.pattern">
         Dato numérico, 1 a 10 dígitos.
       </span>
       </div>
@@ -81,7 +81,7 @@
         formControlName="ProductoFechaAlta"
         [ngClass]="{'is-invalid': (FormAlta.controls.ProductoFechaAlta.touched || submitted)  && FormAlta.controls.ProductoFechaAlta.errors}"
       />
-        <span class="text-danger" *ngIf="(FormAlta.controls.ProductoNombre.touched || submitted) && FormAlta.controls.ProductoFechaAlta.errors && FormAlta.controls.ProductoFechaAlta.errors.required ">
+        <span class="text-danger" *ngIf="(FormAlta.controls.ProductoFechaAlta.touched || submitted) && FormAlta.controls.ProductoFechaAlta.errors && FormAlta.controls.ProductoFechaAlta.errors.required ">
         Dato requerido
       </span>
         <span class="text-danger" *ngIf="(FormAlta.controls.ProductoNombre.touched || submitted) && FormAlta.controls.ProductoFechaAlta.errors?.pattern">
@@ -107,9 +107,4 @@
     {{AccionABMC == 'A' || AccionABMC == 'M' ? 'Cancelar' : 'Volver'}}
   </button>
   </div>
-
-  <!--texto: Revisar los datos ingresados...
-  <div id="divMsjFormRegistro" class="row alert alert-danger" *ngIf="submitted && FormAlta.invalid">
-    <span class="fas fa-exclamation-sign"></span>{{Mensajes['RD']}}
-  </div>-->
 </form>
