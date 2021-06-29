@@ -60,7 +60,43 @@ export class ProductosComponent implements OnInit {
     });
   }
 
-  Grabar() {}
+  Grabar() {
+    this.submitted = true;
+    if (this.FormAlta.invalid) {
+      return;
+    }
+
+    const itemCopy = { ...this.FormAlta.value };
+
+    var arrFecha = itemCopy.ProductoFechaAlta.substr(0, 10).split('/');
+    if (arrFecha.length == 3)
+      itemCopy.ProductoFechaAlta = new Date(
+        arrFecha[2],
+        arrFecha[1] - 1,
+        arrFecha[0]
+      ).toISOString();
+
+    if (this.AccionABMC == 'A') {
+      //this.modalDialogService.BloquearPantalla();
+      this.productoService.post(itemCopy).subscribe((res: any) => {
+        this.Volver();
+        this.modalDialogService.Alert('Registro agregado correctamente.');
+        //this.Buscar();
+        //this.modalDialogService.DesbloquearPantalla();
+      });
+    } else {
+      // modificar put
+      //this.modalDialogService.BloquearPantalla();
+      this.productoService
+        .put(itemCopy.ProductoID, itemCopy)
+        .subscribe((res: any) => {
+          this.Volver();
+          this.modalDialogService.Alert('Registro modificado correctamente.');
+          //this.Buscar();
+          //this.modalDialogService.DesbloquearPantalla();
+        });
+    }
+  }
 
   Volver() {
     this.AccionABMC = 'L';

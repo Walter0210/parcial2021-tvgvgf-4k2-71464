@@ -1,12 +1,13 @@
 <h3>{{Titulo}} <small>{{TituloAccionABMC[AccionABMC]}}</small></h3>
 
 <!-- Botones -->
-<div class="row justify-content-center">
+<div class="row justify-content-center" *ngIf="AccionABMC == 'L'">
   <button type="button" class="btn btn-primary" (click)="Agregar()">
     <span class="fas fa-plus"> </span>
     Agregar Producto
   </button>
 </div>
+<br>
 
 <!-- Tabla de resutados de busqueda y Paginador-->
 <div id="divTablaResultados" *ngIf="AccionABMC == 'L' &&  Items?.length > 0">
