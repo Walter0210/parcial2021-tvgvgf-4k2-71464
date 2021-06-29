@@ -1,3 +1,13 @@
+<h3>{{Titulo}} <small>{{TituloAccionABMC[AccionABMC]}}</small></h3>
+
+<!-- Botones -->
+<div class="row justify-content-center">
+  <button type="button" class="btn btn-primary" (click)="Agregar()">
+    <span class="fas fa-plus"> </span>
+    Agregar Producto
+  </button>
+</div>
+
 <!-- Tabla de resutados de busqueda y Paginador-->
 <div id="divTablaResultados" *ngIf="AccionABMC == 'L' &&  Items?.length > 0">
   <table class="table table-bordered table-striped">
@@ -18,3 +28,88 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<!-- Registro en Alta,Modificacion o Consulta -->
+<form name="FormAlta" *ngIf="AccionABMC != 'L'" [formGroup]="FormAlta">
+  <fieldset [disabled]="AccionABMC==='C'">
+    <!--campo nombre-->
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2 offset-sm-2" for="NombreProducto">
+      Nombre <span class="text-danger">*</span>
+    </label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control text-uppercase" formControlName="ProductoNombre" [ngClass]="{'is-invalid':(FormAlta.controls.ProductoNombre.touched || submitted) && FormAlta.controls.ProductoNombre.errors}" />
+        <span class="text-danger" *ngIf="(FormAlta.controls.ProductoNombre.touched || submitted) && FormAlta.controls.ProductoNombre.errors && FormAlta.controls.ProductoNombre.errors.required ">
+        Dato requerido
+      </span>
+        <span class="text-danger" *ngIf="(FormAlta.controls.ProductoNombre.touched || submitted) && (FormAlta.controls.ProductoNombre.errors?.minlength || FormAlta.controls.ProductoNombre.errors?.maxlength)">Dato texto de 5 a 55 caracteres</span>
+      </div>
+    </div>
+
+    <!--campo stock-->
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2 offset-sm-2" for="ProductoStock">
+      Stock <span class="text-danger">*</span>
+    </label>
+      <div class="col-sm-6">
+        <input
+        type="text"
+        name="ProductoStock"
+        class="form-control"
+        formControlName="ProductoStock"
+        [ngClass]="{'is-invalid': (FormAlta.controls.ProductoStock.touched || submitted)  && FormAlta.controls.ProductoStock.errors}"
+      />
+        <span class="text-danger" *ngIf="(FormAlta.controls.ProductoNombre.touched || submitted) && FormAlta.controls.ProductoStock.errors && FormAlta.controls.ProductoStock.errors.required ">
+        Dato requerido
+      </span>
+        <span class="text-danger" *ngIf="(FormAlta.controls.ProductoNombre.touched || submitted) && FormAlta.controls.ProductoStock.errors?.pattern">
+        Dato numérico, 1 a 10 dígitos.
+      </span>
+      </div>
+    </div>
+
+    <!--campo fechaalta-->
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2 offset-sm-2">
+      Fecha de alta <span class="text-danger">*</span>
+    </label>
+      <div class="col-sm-6">
+        <input
+        class="form-control"
+        name="ProductoFechaAlta"
+        formControlName="ProductoFechaAlta"
+        [ngClass]="{'is-invalid': (FormAlta.controls.ProductoFechaAlta.touched || submitted)  && FormAlta.controls.ProductoFechaAlta.errors}"
+      />
+        <span class="text-danger" *ngIf="(FormAlta.controls.ProductoNombre.touched || submitted) && FormAlta.controls.ProductoFechaAlta.errors && FormAlta.controls.ProductoFechaAlta.errors.required ">
+        Dato requerido
+      </span>
+        <span class="text-danger" *ngIf="(FormAlta.controls.ProductoNombre.touched || submitted) && FormAlta.controls.ProductoFechaAlta.errors?.pattern">
+        Dato fecha, formato dd/mm/aaaa.
+      </span>
+      </div>
+    </div>
+  </fieldset>
+
+  <!-- Botones Grabar, Cancelar/Volver' -->
+  <div class="row justify-content-center">
+    <button
+    type="button"
+    class="btn btn-primary"
+    (click)="Grabar()"
+    *ngIf=" AccionABMC == 'A'  || AccionABMC == 'M' "
+  >
+    <span class="fas fa-check"></span> Guardar
+  </button>
+    &nbsp;
+    <button type="button" class="btn btn-warning" (click)="Volver()">
+    <span class="fas fa-undo"></span>
+    {{AccionABMC == 'A' || AccionABMC == 'M' ? 'Cancelar' : 'Volver'}}
+  </button>
+  </div>
+
+  <!--texto: Revisar los datos ingresados...
+  <div id="divMsjFormRegistro" class="row alert alert-danger" *ngIf="submitted && FormAlta.invalid">
+    <span class="fas fa-exclamation-sign"></span>{{Mensajes['RD']}}
+  </div>-->
+</form>
