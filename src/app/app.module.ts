@@ -26,7 +26,7 @@ import {
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 import { ModalDialogService } from './services/modal-dialog.service';
 import { ProductosComponent } from './components/productos/productos.component';
-import { ProductosServiceService } from './services/productos-service.service';
+import { ProductosServiceService } from './services/productos.service';
 
 @NgModule({
   imports: [

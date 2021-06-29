@@ -22,7 +22,10 @@ export class ProductosComponent implements OnInit {
 
   constructor(private productoService: ProductosServiceService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.GetProductos();
+  }
+
 
   GetProductos() {
     this.productoService.get().subscribe((res: Producto[]) => {
